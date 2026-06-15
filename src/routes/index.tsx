@@ -219,18 +219,17 @@ function HomePage() {
         )}
       </header>
 
-      {/* HERO SECTION - Full-bleed background */}
+      {/* HERO SECTION */}
       <section 
         id="top" 
-        className="relative min-h-[90vh] flex items-center pt-28 pb-20 md:pt-36 bg-cover bg-center bg-no-repeat overflow-hidden"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        className="relative min-h-[90vh] flex items-center pt-28 pb-20 md:pt-36 bg-background overflow-hidden"
       >
-        {/* Overlay gradient - fades to black on left for maximum readability */}
-        <div className="absolute inset-0 bg-gradient-hero z-0 pointer-events-none" />
+        {/* Ambient glow in background */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
         
         <div className="relative max-w-7xl mx-auto px-6 w-full z-10 grid lg:grid-cols-12 gap-12 items-center">
           
-          <div className="lg:col-span-8 text-left space-y-6">
+          <div className="lg:col-span-7 text-left space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4.5 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
               <span className="size-2 rounded-full bg-cyan animate-pulse" />
               Climatização Residencial e Corporativa
@@ -241,7 +240,7 @@ function HomePage() {
               de alto padrão para seu <span className="text-primary">ambiente</span>.
             </h1>
             
-            <p className="text-base md:text-lg text-slate-200 leading-relaxed max-w-2xl">
+            <p className="text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl">
               Instalação técnica credenciada, manutenção preventiva profunda e projetos de PMOC executados por especialistas certificados. Mantenha a garantia de fábrica e ar puro o ano todo.
             </p>
             
@@ -273,6 +272,30 @@ function HomePage() {
               <div>
                 <div className="font-display text-2xl font-black text-white">90 Dias</div>
                 <div className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mt-0.5">Garantia por Escrito</div>
+              </div>
+            </div>
+          </div>
+
+          {/* HERO IMAGE CONTAINER */}
+          <div className="lg:col-span-5 relative flex justify-center items-center animate-float">
+            {/* Soft decorative glow */}
+            <div className="absolute -inset-4 bg-primary/20 rounded-full blur-3xl opacity-60" />
+            
+            <div className="relative rounded-3xl overflow-hidden border border-border/60 shadow-2xl shadow-primary/5 max-w-md lg:max-w-full">
+              <img 
+                src={heroImage} 
+                alt="Instalação de Ar Condicionado" 
+                className="w-full h-auto object-cover aspect-[4/3] rounded-3xl hover:scale-105 transition-transform duration-500"
+              />
+              {/* Overlay Badge */}
+              <div className="absolute bottom-4 left-4 right-4 bg-background/90 backdrop-blur-md border border-border/40 p-4 rounded-2xl flex items-center gap-3">
+                <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                  <Snowflake className="size-5 text-primary animate-spin" style={{ animationDuration: '10s' }} />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-white uppercase">Ar Puro e Seguro</h4>
+                  <span className="text-[10px] text-slate-300">Climatização de Alta Eficiência</span>
+                </div>
               </div>
             </div>
           </div>
