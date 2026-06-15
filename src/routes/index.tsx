@@ -5,7 +5,7 @@ import {
   Phone, Mail, MapPin, ArrowRight, CheckCircle2, Clock, Menu, X, Star, ChevronDown, Send
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import logoAsset from "@/assets/garras-logo.png.asset.json";
+import logoImage from "@/assets/garras-logo.png";
 import heroImage from "@/assets/hero-ac.jpg";
 
 export const Route = createFileRoute("/")({
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Manutenção preventiva, instalação, higienização e projetos PMOC de ar condicionado. Atendimento profissional, rápido e garantido." },
       { property: "og:title", content: "Garras Serviços — Climatização e Manutenção de Ar Condicionado" },
       { property: "og:description", content: "Equipe técnica certificada, garantia mantida e atendimento ágil." },
-      { property: "og:image", content: logoAsset.url },
+      { property: "og:image", content: logoImage },
     ],
   }),
   component: HomePage,
@@ -31,12 +31,12 @@ const services = [
 ];
 
 const brands = [
-  { name: "Daikin", country: "Líder em tecnologia Inverter" },
-  { name: "Fujitsu", country: "Alta eficiência e durabilidade" },
-  { name: "LG", country: "Linha premium inteligente" },
-  { name: "Samsung", country: "Tecnologia WindFree inovadora" },
-  { name: "Carrier", country: "Robustez e tradição global" },
-  { name: "Midea", country: "Custo-benefício e versatilidade" }
+  { name: "Daikin", desc: "Tecnologia Inverter" },
+  { name: "Fujitsu", desc: "Eficiência Máxima" },
+  { name: "LG", desc: "Linha Smart Premium" },
+  { name: "Samsung", desc: "WindFree Sem Vento" },
+  { name: "Carrier", desc: "Tradição e Força" },
+  { name: "Midea", desc: "Custo-Benefício" }
 ];
 
 const steps = [
@@ -148,20 +148,17 @@ function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased bg-hero-pattern">
+    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-white">
       <Toaster position="top-right" richColors />
 
       {/* HEADER NAV */}
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/90 border-b border-border transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-lg bg-background/90 border-b border-border/40 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
           <a href="#top" className="flex items-center gap-3">
-            <img src={logoAsset.url} alt="Garras Serviços Logo" className="h-10 w-auto object-contain" />
-            <span className="font-display font-extrabold text-2xl tracking-tight text-slate-900">
-              Garras<span className="text-primary">Serviços</span>
-            </span>
+            <img src={logoImage} alt="Garras Serviços Logo" className="h-16 w-auto object-contain" />
           </a>
           
-          <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+          <nav className="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-slate-300">
             <a href="#marcas" className="hover:text-primary transition-colors">Marcas</a>
             <a href="#servicos" className="hover:text-primary transition-colors">Serviços</a>
             <a href="#processo" className="hover:text-primary transition-colors">Como Funciona</a>
@@ -170,22 +167,22 @@ function HomePage() {
             <a href="#contato" className="hover:text-primary transition-colors">Contato</a>
           </nav>
 
-          <div className="hidden md:flex items-center gap-4">
-            <a href={`tel:+5511987654321`} className="text-sm font-bold text-slate-700 hover:text-primary flex items-center gap-2 transition-colors">
+          <div className="hidden lg:flex items-center gap-6">
+            <a href={`tel:+5511987654321`} className="text-sm font-bold text-slate-200 hover:text-primary flex items-center gap-2 transition-colors">
               <Phone className="size-4 text-primary" /> (11) 98765-4321
             </a>
             <a 
               href={waLinkDefault} 
               target="_blank"
               rel="noopener noreferrer" 
-              className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/95 transition-all shadow-md shadow-primary/10 hover:shadow-lg"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-primary-foreground hover:bg-primary/95 transition-all shadow-lg shadow-primary/20"
             >
               Falar com Técnico
             </a>
           </div>
 
           <button 
-            className="md:hidden p-2 text-slate-700 hover:text-primary transition-colors" 
+            className="lg:hidden p-2 text-slate-200 hover:text-primary transition-colors" 
             onClick={() => setMenuOpen(!menuOpen)} 
             aria-label="Menu"
           >
@@ -195,25 +192,25 @@ function HomePage() {
 
         {/* MOBILE MENU */}
         {menuOpen && (
-          <div className="md:hidden border-t border-border px-6 py-6 flex flex-col gap-4 bg-background/98 shadow-xl">
-            <a href="#marcas" className="text-lg font-medium text-slate-700 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Marcas</a>
-            <a href="#servicos" className="text-lg font-medium text-slate-700 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Serviços</a>
-            <a href="#processo" className="text-lg font-medium text-slate-700 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Como Funciona</a>
-            <a href="#depoimentos" className="text-lg font-medium text-slate-700 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Depoimentos</a>
-            <a href="#faq" className="text-lg font-medium text-slate-700 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>FAQ</a>
-            <a href="#contato" className="text-lg font-medium text-slate-700 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Contato</a>
+          <div className="lg:hidden border-t border-border/40 px-6 py-6 flex flex-col gap-4 bg-background/98 shadow-2xl">
+            <a href="#marcas" className="text-base font-bold uppercase tracking-wider text-slate-200 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Marcas</a>
+            <a href="#servicos" className="text-base font-bold uppercase tracking-wider text-slate-200 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Serviços</a>
+            <a href="#processo" className="text-base font-bold uppercase tracking-wider text-slate-200 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Como Funciona</a>
+            <a href="#depoimentos" className="text-base font-bold uppercase tracking-wider text-slate-200 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Depoimentos</a>
+            <a href="#faq" className="text-base font-bold uppercase tracking-wider text-slate-200 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>FAQ</a>
+            <a href="#contato" className="text-base font-bold uppercase tracking-wider text-slate-200 hover:text-primary py-1" onClick={()=>setMenuOpen(false)}>Contato</a>
             
-            <hr className="border-border my-2" />
+            <hr className="border-border/40 my-2" />
             
             <div className="flex flex-col gap-4">
-              <a href={`tel:+5511987654321`} className="font-bold text-slate-800 flex items-center gap-2 justify-center py-2">
+              <a href={`tel:+5511987654321`} className="font-bold text-slate-100 flex items-center gap-2 justify-center py-2">
                 <Phone className="size-4 text-primary" /> (11) 98765-4321
               </a>
               <a 
                 href={waLinkDefault}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-primary px-6 py-3 text-center text-sm font-semibold text-primary-foreground hover:bg-primary/95 transition-all"
+                className="rounded-full bg-primary px-6 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-primary-foreground hover:bg-primary/95 transition-all"
               >
                 Orçamento via WhatsApp
               </a>
@@ -222,105 +219,78 @@ function HomePage() {
         )}
       </header>
 
-      {/* HERO SECTION */}
-      <section id="top" className="relative pt-32 pb-20 md:pt-48 md:pb-28 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+      {/* HERO SECTION - Full-bleed background */}
+      <section 
+        id="top" 
+        className="relative min-h-[90vh] flex items-center pt-28 pb-20 md:pt-36 bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        {/* Overlay gradient - fades to black on left for maximum readability */}
+        <div className="absolute inset-0 bg-gradient-hero z-0 pointer-events-none" />
+        
+        <div className="relative max-w-7xl mx-auto px-6 w-full z-10 grid lg:grid-cols-12 gap-12 items-center">
           
-          <div className="lg:col-span-7 text-left space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4.5 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+          <div className="lg:col-span-8 text-left space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4.5 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
               <span className="size-2 rounded-full bg-cyan animate-pulse" />
               Climatização Residencial e Corporativa
             </div>
             
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1] tracking-tight text-slate-900">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6.5xl font-black leading-[1.1] tracking-tight text-white max-w-3xl">
               Conforto térmico <br className="hidden sm:inline" />
-              de alto padrão para seu <span className="text-gradient">ambiente</span>.
+              de alto padrão para seu <span className="text-primary">ambiente</span>.
             </h1>
             
-            <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
+            <p className="text-base md:text-lg text-slate-200 leading-relaxed max-w-2xl">
               Instalação técnica credenciada, manutenção preventiva profunda e projetos de PMOC executados por especialistas certificados. Mantenha a garantia de fábrica e ar puro o ano todo.
             </p>
             
             <div className="flex flex-wrap gap-4 pt-2">
               <a 
                 href="#contato" 
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-bold text-primary-foreground hover:bg-primary/95 transition-all shadow-lg shadow-primary/20"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-bold uppercase tracking-wider text-xs text-primary-foreground hover:bg-primary/95 transition-all shadow-lg shadow-primary/20"
               >
                 Solicitar Orçamento <ArrowRight className="size-4" />
               </a>
               <a 
                 href="#servicos" 
-                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-4 font-bold text-slate-700 hover:border-primary/50 hover:bg-slate-50 transition-all shadow-sm"
+                className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-background/50 backdrop-blur-sm px-8 py-4 font-bold uppercase tracking-wider text-xs text-slate-200 hover:border-primary/50 hover:bg-background/80 transition-all shadow-sm"
               >
                 Conhecer Serviços
               </a>
             </div>
             
-            {/* Trust Badges */}
-            <div className="pt-8 grid grid-cols-3 gap-4 border-t border-slate-200 max-w-xl">
+            {/* Quick Value Metrics */}
+            <div className="pt-8 grid grid-cols-3 gap-4 border-t border-slate-800 max-w-xl">
               <div>
-                <div className="font-display text-2xl font-bold text-slate-900">100%</div>
-                <div className="text-xs font-medium text-slate-500 mt-0.5">Técnicos Certificados</div>
+                <div className="font-display text-2xl font-black text-white">100%</div>
+                <div className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mt-0.5">Técnicos Credenciados</div>
               </div>
               <div>
-                <div className="font-display text-2xl font-bold text-slate-900">+8k</div>
-                <div className="text-xs font-medium text-slate-500 mt-0.5">Aparelhos Atendidos</div>
+                <div className="font-display text-2xl font-black text-white">+8.500</div>
+                <div className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mt-0.5">Atendimentos</div>
               </div>
               <div>
-                <div className="font-display text-2xl font-bold text-slate-900">90 dias</div>
-                <div className="text-xs font-medium text-slate-500 mt-0.5">Garantia por Escrito</div>
+                <div className="font-display text-2xl font-black text-white">90 Dias</div>
+                <div className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mt-0.5">Garantia por Escrito</div>
               </div>
             </div>
           </div>
-
-          {/* Hero Image / Premium Frame */}
-          <div className="lg:col-span-5 relative animate-float">
-            <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-tr from-primary/10 to-cyan/20 blur-2xl opacity-60 pointer-events-none" />
-            <div className="relative rounded-[2rem] overflow-hidden border border-slate-200 shadow-2xl bg-white p-2">
-              <img 
-                src={heroImage} 
-                alt="Técnico qualificado revisando split com ferramentas profissionais" 
-                className="rounded-[1.5rem] w-full object-cover aspect-[4/3] sm:aspect-square" 
-              />
-              
-              {/* Overlay quality badges */}
-              <div className="absolute left-6 bottom-8 bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-slate-100 flex items-center gap-3">
-                <div className="size-10 rounded-xl bg-cyan/10 flex items-center justify-center">
-                  <CheckCircle2 className="size-5 text-cyan" />
-                </div>
-                <div>
-                  <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Instalação</div>
-                  <div className="font-display font-bold text-xs text-slate-800">Padrão Autorizado</div>
-                </div>
-              </div>
-              
-              <div className="absolute right-6 top-8 bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-slate-100 flex items-center gap-3">
-                <div className="size-10 rounded-xl bg-amber/10 flex items-center justify-center">
-                  <Clock className="size-5 text-amber" />
-                </div>
-                <div>
-                  <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Atendimento</div>
-                  <div className="font-display font-bold text-xs text-slate-800">Rápido e Pontual</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
       {/* MARCAS PARCEIRAS */}
-      <section id="marcas" className="relative py-12 border-y border-slate-200 bg-white">
+      <section id="marcas" className="relative py-14 border-y border-border/40 bg-card/40">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-xl mx-auto mb-8">
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-slate-400">Atendimento Multimarcas</span>
-            <h2 className="text-lg font-bold text-slate-800 mt-1">Garantia mantida nas principais fabricantes</h2>
+          <div className="text-center max-w-xl mx-auto mb-10">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-primary">// Multimarcas</span>
+            <h2 className="text-lg font-bold text-slate-200 mt-1">Atendimento autorizado nas principais fabricantes</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6 items-center">
             {brands.map((b) => (
-              <div key={b.name} className="flex flex-col items-center justify-center p-4 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-slate-200 transition-all duration-300">
-                <span className="font-display font-black text-xl tracking-tight text-slate-700">{b.name}</span>
-                <span className="text-[9px] text-slate-400 font-medium text-center mt-1">{b.country}</span>
+              <div key={b.name} className="flex flex-col items-center justify-center p-5 rounded-2xl border border-border/30 bg-card hover:bg-background hover:border-primary/40 transition-all duration-300">
+                <span className="font-display font-black text-xl tracking-tight text-white">{b.name}</span>
+                <span className="text-[9px] text-slate-400 font-semibold text-center mt-1">{b.desc}</span>
               </div>
             ))}
           </div>
@@ -328,31 +298,31 @@ function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section id="servicos" className="relative py-24 bg-slate-50">
+      <section id="servicos" className="relative py-24 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
             <span className="text-xs font-extrabold uppercase tracking-widest text-primary">// Nossos Serviços</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">Soluções completas sob medida.</h2>
-            <p className="text-slate-600">Seja para um split residencial ou sistemas industriais integrados, nós temos a equipe certa.</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white">Soluções completas de climatização.</h2>
+            <p className="text-slate-400">Seja para um split residencial ou sistemas industriais integrados, nós temos a equipe certa.</p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s) => (
-              <div key={s.title} className="premium-card rounded-3xl p-8 bg-white flex flex-col justify-between group">
+              <div key={s.title} className="premium-card rounded-3xl p-8 bg-card flex flex-col justify-between group border-border/30">
                 <div>
-                  <div className="size-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-primary group-hover:text-white">
-                    <s.icon className="size-6 text-primary group-hover:text-white transition-colors" />
+                  <div className="size-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                    <s.icon className="size-6 text-primary group-hover:text-primary-foreground transition-colors" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">{s.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-6">{s.desc}</p>
+                  <h3 className="text-xl font-bold text-white mb-3">{s.title}</h3>
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">{s.desc}</p>
                 </div>
                 <a 
                   href={`https://wa.me/${whatsappNumber}?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20serviço%20de%20*${encodeURIComponent(s.title)}*.`}
                   target="_blank"
                   rel="noopener noreferrer" 
-                  className="inline-flex items-center gap-1 text-xs font-bold text-primary group-hover:gap-2 transition-all mt-auto"
+                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-primary group-hover:gap-2 transition-all mt-auto"
                 >
-                  Solicitar este serviço <ArrowRight className="size-3.5" />
+                  Falar com especialista <ArrowRight className="size-3.5" />
                 </a>
               </div>
             ))}
@@ -361,28 +331,28 @@ function HomePage() {
       </section>
 
       {/* PROCESS / HOW IT WORKS */}
-      <section id="processo" className="relative py-24 bg-white">
+      <section id="processo" className="relative py-24 bg-card/25 border-y border-border/40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-primary">// Transparência</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">Como funciona o atendimento?</h2>
-            <p className="text-slate-600">Garantimos um processo limpo, rápido e sem dores de cabeça do início ao fim.</p>
+            <span className="text-xs font-extrabold uppercase tracking-widest text-primary">// Profissionalismo</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white">Como funciona nosso atendimento?</h2>
+            <p className="text-slate-400">Garantimos um processo limpo, rápido e sem dores de cabeça do início ao fim.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, i) => (
-              <div key={step.n} className="relative p-6 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors">
+              <div key={step.n} className="relative p-6 rounded-2xl border border-border/30 bg-card/50">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="font-display font-black text-4xl text-slate-100 leading-none">{step.n}</span>
-                  <div className="size-8 rounded-lg bg-slate-50 flex items-center justify-center border border-slate-100 text-slate-500">
+                  <span className="font-display font-black text-4xl text-slate-800 leading-none">{step.n}</span>
+                  <div className="size-8 rounded-lg bg-background flex items-center justify-center border border-border/30 text-primary">
                     <CheckCircle2 className="size-4 text-primary" />
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-slate-800 mb-2">{step.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+                <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">{step.desc}</p>
                 
                 {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-12 -right-4 translate-x-1/2 z-10 text-slate-300">
+                  <div className="hidden lg:block absolute top-12 -right-4 translate-x-1/2 z-10 text-slate-700">
                     <ArrowRight className="size-5" />
                   </div>
                 )}
@@ -392,34 +362,34 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS (NEW SECTION) */}
-      <section id="depoimentos" className="relative py-24 bg-slate-50 border-t border-slate-100">
+      {/* TESTIMONIALS */}
+      <section id="depoimentos" className="relative py-24 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
             <span className="text-xs font-extrabold uppercase tracking-widest text-primary">// Depoimentos</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">O que nossos clientes dizem.</h2>
-            <p className="text-slate-600">A opinião e satisfação de quem confia no nosso trabalho diariamente.</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white">Resultados comprovados na prática.</h2>
+            <p className="text-slate-400">A opinião e satisfação de quem confia no nosso trabalho diariamente.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, index) => (
-              <div key={index} className="premium-card rounded-3xl p-8 bg-white flex flex-col justify-between">
+              <div key={index} className="premium-card rounded-3xl p-8 bg-card flex flex-col justify-between border-border/30">
                 <div>
                   <div className="flex gap-1 mb-4">
                     {[...Array(t.rating)].map((_, i) => (
                       <Star key={i} className="size-4 fill-amber text-amber" />
                     ))}
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed italic mb-6">"{t.text}"</p>
+                  <p className="text-sm text-slate-300 leading-relaxed italic mb-6">"{t.text}"</p>
                 </div>
                 
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                <div className="flex items-center gap-3 pt-4 border-t border-border/30">
                   <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center font-display font-bold text-sm text-primary">
                     {t.name[0]}
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-800 leading-none">{t.name}</h4>
-                    <span className="text-[11px] text-slate-400 font-medium block mt-1">{t.role} · {t.location}</span>
+                    <h4 className="text-sm font-bold text-white leading-none">{t.name}</h4>
+                    <span className="text-[11px] text-slate-400 font-semibold block mt-1">{t.role} · {t.location}</span>
                   </div>
                 </div>
               </div>
@@ -428,16 +398,16 @@ function HomePage() {
         </div>
       </section>
 
-      {/* CONTACT & INTERACTIVE FORM SECTION (NEW & IMPROVED FUNCTIONALITY) */}
-      <section id="contato" className="relative py-24 bg-white border-t border-slate-100">
+      {/* CONTACT & INTERACTIVE FORM */}
+      <section id="contato" className="relative py-24 bg-card/15 border-t border-border/40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             
-            {/* Informational column */}
-            <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
-              <span className="text-xs font-extrabold uppercase tracking-widest text-primary">// Solicite seu orçamento</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">Fale com nossa equipe técnica.</h2>
-              <p className="text-slate-600 leading-relaxed">
+            {/* Informational Column */}
+            <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-primary">// Orçamentos rápidos</span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white">Fale com nossa equipe técnica.</h2>
+              <p className="text-slate-400 leading-relaxed">
                 Preencha o formulário ao lado com suas informações e necessidades básicas. O formulário gerará uma solicitação e você também poderá enviar todos os detalhes diretamente pelo WhatsApp para agilizar sua resposta.
               </p>
               
@@ -448,7 +418,7 @@ function HomePage() {
                   </div>
                   <div>
                     <h4 className="text-xs text-slate-400 font-bold uppercase">Telefone / WhatsApp</h4>
-                    <a href={`tel:+5511987654321`} className="text-sm font-bold text-slate-800 hover:text-primary transition-colors">(11) 98765-4321</a>
+                    <a href={`tel:+5511987654321`} className="text-sm font-bold text-white hover:text-primary transition-colors">(11) 98765-4321</a>
                   </div>
                 </div>
 
@@ -458,7 +428,7 @@ function HomePage() {
                   </div>
                   <div>
                     <h4 className="text-xs text-slate-400 font-bold uppercase">E-mail Comercial</h4>
-                    <a href="mailto:contato@garrasservicos.com.br" className="text-sm font-bold text-slate-800 hover:text-primary transition-colors">contato@garrasservicos.com.br</a>
+                    <a href="mailto:contato@garrasservicos.com.br" className="text-sm font-bold text-white hover:text-primary transition-colors">contato@garrasservicos.com.br</a>
                   </div>
                 </div>
 
@@ -468,7 +438,7 @@ function HomePage() {
                   </div>
                   <div>
                     <h4 className="text-xs text-slate-400 font-bold uppercase">Área de Atendimento</h4>
-                    <span className="text-sm font-bold text-slate-800">Grande São Paulo, ABCD e Interior</span>
+                    <span className="text-sm font-bold text-white">Grande São Paulo, ABCD e Interior</span>
                   </div>
                 </div>
 
@@ -478,21 +448,21 @@ function HomePage() {
                   </div>
                   <div>
                     <h4 className="text-xs text-slate-400 font-bold uppercase">Horário Comercial</h4>
-                    <span className="text-sm font-bold text-slate-800">Segunda a Sábado · 8h às 19h</span>
+                    <span className="text-sm font-bold text-white">Segunda a Sábado · 8h às 19h</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Interactive Form Column */}
-            <div className="lg:col-span-7 bg-slate-50 rounded-3xl p-8 border border-slate-100 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-800 mb-2">Envie uma mensagem</h3>
-              <p className="text-xs text-slate-500 mb-6">Campos marcados com * são obrigatórios.</p>
+            {/* Form Column */}
+            <div className="lg:col-span-7 bg-card rounded-3xl p-8 border border-border/30 shadow-2xl">
+              <h3 className="text-lg font-bold text-white mb-2">Solicitar Atendimento</h3>
+              <p className="text-xs text-slate-400 mb-6">Campos marcados com * são obrigatórios.</p>
               
               <form onSubmit={handleFormSubmit} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700" htmlFor="nome">Seu Nome *</label>
+                    <label className="text-xs font-bold text-slate-300" htmlFor="nome">Seu Nome *</label>
                     <input 
                       type="text" 
                       id="nome" 
@@ -501,12 +471,12 @@ function HomePage() {
                       placeholder="Ex: Pedro Henrique" 
                       value={formData.nome}
                       onChange={handleInputChange}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700" htmlFor="whatsapp">WhatsApp / Celular *</label>
+                    <label className="text-xs font-bold text-slate-300" htmlFor="whatsapp">WhatsApp / Celular *</label>
                     <input 
                       type="tel" 
                       id="whatsapp" 
@@ -515,14 +485,14 @@ function HomePage() {
                       placeholder="Ex: (11) 98765-4321" 
                       value={formData.whatsapp}
                       onChange={handleInputChange}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700" htmlFor="email">E-mail (opcional)</label>
+                    <label className="text-xs font-bold text-slate-300" htmlFor="email">E-mail (opcional)</label>
                     <input 
                       type="email" 
                       id="email" 
@@ -530,32 +500,32 @@ function HomePage() {
                       placeholder="Ex: seuemail@empresa.com" 
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700" htmlFor="servico">Serviço Necessário *</label>
+                    <label className="text-xs font-bold text-slate-300" htmlFor="servico">Serviço Necessário *</label>
                     <select 
                       id="servico" 
                       name="servico"
                       required
                       value={formData.servico}
                       onChange={handleInputChange}
-                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary transition-colors cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23475569%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1rem_center] bg-no-repeat"
+                      className="w-full bg-background border border-border/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1rem_center] bg-no-repeat"
                     >
-                      <option value="">Selecione uma opção...</option>
-                      <option value="Instalação Comercial/Residencial">Instalação Completa</option>
-                      <option value="Manutenção Preventiva / Limpeza">Manutenção Preventiva / Higienização</option>
-                      <option value="Conserto / Reparo Rápido">Conserto / Assistência Técnica</option>
-                      <option value="Contrato PMOC corporativo">Contrato PMOC corporativo</option>
-                      <option value="Outro Serviço">Outro / Não sei</option>
+                      <option value="" className="bg-card">Selecione uma opção...</option>
+                      <option value="Instalação Comercial/Residencial" className="bg-card">Instalação Completa</option>
+                      <option value="Manutenção Preventiva / Limpeza" className="bg-card">Manutenção Preventiva / Higienização</option>
+                      <option value="Conserto / Reparo Rápido" className="bg-card">Conserto / Assistência Técnica</option>
+                      <option value="Contrato PMOC corporativo" className="bg-card">Contrato PMOC corporativo</option>
+                      <option value="Outro Serviço" className="bg-card">Outro / Não sei</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700" htmlFor="mensagem">Detalhes do Chamado (opcional)</label>
+                  <label className="text-xs font-bold text-slate-300" htmlFor="mensagem">Detalhes do Chamado (opcional)</label>
                   <textarea 
                     id="mensagem" 
                     name="mensagem"
@@ -563,17 +533,17 @@ function HomePage() {
                     placeholder="Descreva brevemente o problema, número de aparelhos ou modelo/marca se souber..." 
                     value={formData.mensagem}
                     onChange={handleInputChange}
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary transition-colors resize-none"
+                    className="w-full bg-background border border-border/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-colors resize-none"
                   />
                 </div>
 
                 <button 
                   type="submit" 
                   disabled={loading}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary py-3 px-6 text-sm font-bold text-primary-foreground hover:bg-primary/95 transition-all shadow-md disabled:opacity-50 cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary py-3 px-6 text-sm font-bold uppercase tracking-wider text-primary-foreground hover:bg-primary/95 transition-all shadow-md disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? (
-                    <span className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span className="size-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <>
                       <Send className="size-4" /> Enviar e ir para o WhatsApp
@@ -587,13 +557,13 @@ function HomePage() {
         </div>
       </section>
 
-      {/* FAQ SECTION (NEW SECTION) */}
-      <section id="faq" className="relative py-24 bg-slate-50 border-t border-slate-100">
+      {/* FAQ SECTION */}
+      <section id="faq" className="relative py-24 bg-background">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16 space-y-3">
             <span className="text-xs font-extrabold uppercase tracking-widest text-primary">// FAQ</span>
-            <h2 className="text-3xl font-extrabold text-slate-900">Perguntas Frequentes</h2>
-            <p className="text-slate-600">Tire suas principais dúvidas sobre nossos atendimentos, garantias e normas.</p>
+            <h2 className="text-3xl font-extrabold text-white">Perguntas Frequentes</h2>
+            <p className="text-slate-400">Tire suas principais dúvidas sobre nossos atendimentos, garantias e normas.</p>
           </div>
 
           <div className="space-y-4">
@@ -602,18 +572,18 @@ function HomePage() {
               return (
                 <div 
                   key={index} 
-                  className="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm transition-all"
+                  className="bg-card border border-border/30 rounded-2xl overflow-hidden shadow-sm transition-all"
                 >
                   <button 
                     onClick={() => setFaqActive(active ? null : index)}
-                    className="w-full px-6 py-5 text-left font-bold text-slate-800 flex items-center justify-between gap-4 focus:outline-none"
+                    className="w-full px-6 py-5 text-left font-bold text-white flex items-center justify-between gap-4 focus:outline-none"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown className={`size-5 text-slate-400 transition-transform ${active ? "rotate-180" : ""}`} />
                   </button>
                   
                   {active && (
-                    <div className="px-6 pb-5 text-sm text-slate-600 border-t border-slate-50 pt-3 leading-relaxed">
+                    <div className="px-6 pb-5 text-sm text-slate-300 border-t border-border/20 pt-3 leading-relaxed">
                       {faq.a}
                     </div>
                   )}
@@ -625,13 +595,11 @@ function HomePage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-200 bg-slate-900 text-slate-400 py-16">
+      <footer className="border-t border-border/40 bg-slate-950 text-slate-400 py-16">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8 mb-12">
           
           <div className="space-y-4">
-            <span className="font-display font-black text-2xl tracking-tight text-white">
-              Garras<span className="text-primary">Serviços</span>
-            </span>
+            <img src={logoImage} alt="Garras Serviços Logo" className="h-16 w-auto object-contain" />
             <p className="text-xs text-slate-400 leading-relaxed">
               Serviço especializado de manutenção e instalação de sistemas de ar condicionado residenciais e empresariais. Qualidade, pontualidade e transparência.
             </p>
@@ -668,12 +636,12 @@ function HomePage() {
 
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div className="max-w-7xl mx-auto px-6 border-t border-border/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div>
             © {new Date().getFullYear()} Garras Serviços Ltda. Todos os direitos reservados. CNPJ: 00.000.000/0000-00
           </div>
           <div>
-            Desenvolvido com excelência técnica e foco em conversão
+            Manutenção Inteligente de Ar Condicionado
           </div>
         </div>
       </footer>
